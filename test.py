@@ -29,7 +29,7 @@ def prepare(x):
 
 ##解码翻译结果
 net = Transformer.from_config(src_vocab=len(vocab_x), tgt_vocab=len(vocab_y), N=5, d_model=64, d_ff=128, h=8, dropout=0.1)
-net.load_state_dict(torch.load("checkpoint", map_location='cuda'))
+net.load_state_dict(torch.load("checkpoint.pth", map_location='cuda'))
 net = prepare(net)
 src, tgt = get_data()
 src, tgt = prepare(src), prepare(tgt)
