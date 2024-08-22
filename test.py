@@ -1,5 +1,3 @@
-from fontTools.misc.psOperators import ps_integer
-
 from attention import tril_mask
 import torch
 from dataset import get_data,vocab_x,vocab_y,vocab_xr,vocab_yr
