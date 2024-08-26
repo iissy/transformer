@@ -9,7 +9,6 @@ class PositionEncoding(nn.Module):
         super(PositionEncoding, self).__init__()
         self.dropout = nn.Dropout(p=dropout)
 
-        # Compute the positional encodings once in log space.
         pe = torch.zeros(max_len, d_model)
         position = torch.arange(0, max_len).unsqueeze(1)
         div_term = torch.exp(-math.log(10000) * torch.arange(0, d_model, 2) / d_model)
@@ -17,6 +16,7 @@ class PositionEncoding(nn.Module):
         pe[:, 1::2] = torch.cos(position * div_term)
         pe = pe.unsqueeze(0)
         self.register_buffer('pe', pe)
+
 
     def forward(self, x):
         x = x + self.pe[:, :x.size(1)]
