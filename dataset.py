@@ -7,12 +7,11 @@ from torch.utils.data import Dataset,DataLoader
 # 定义字典
 words_x = '<PAD>,1,2,3,4,5,6,7,8,9,0,<SOS>,<EOS>,+'
 vocab_x = {word: i for i, word in enumerate(words_x.split(','))}
-vocab_xr = [k for k, v in vocab_x.items()]  # 反查词典
+vocab_xr = [k for k in vocab_x.keys()]
 
 words_y = '<PAD>,1,2,3,4,5,6,7,8,9,0,<SOS>,<EOS>'
 vocab_y = {word: i for i, word in enumerate(words_y.split(','))}
-vocab_yr = [k for k, v in vocab_y.items()]  # 反查词典
-
+vocab_yr = [k for k in vocab_y.keys()]
 
 # 两数相加数据集
 def get_data():
