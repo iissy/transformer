@@ -60,9 +60,9 @@ def get_data():
 
 
 def show_data(tensor_x, tensor_y) -> "str":
-    words_x = "".join([vocab_xr[i] for i in tensor_x.tolist()])
-    words_y = "".join([vocab_yr[i] for i in tensor_y.tolist()])
-    return words_x, words_y
+    ws_x = "".join([vocab_xr[i] for i in tensor_x.tolist()])
+    wos_y = "".join([vocab_yr[i] for i in tensor_y.tolist()])
+    return ws_x + "\n" + wos_y
 
 
 class TwoSumDataset(torch.utils.data.Dataset):
@@ -92,6 +92,7 @@ dl_val = DataLoader(dataset=ds_val,
                     shuffle=False)
 
 # x, y = get_data()
+# print(show_data(x, y))
 # print(x, "\n\n", y)
 # print(show_data(x, y))
 # print(len(dl_train))
