@@ -22,7 +22,7 @@ class StepRunner:
 
         # loss
         with self.accelerator.autocast():
-            preds = net.forward(mbatch.src, mbatch.tgt, mbatch.src_mask, mbatch.tgt_mask)
+            preds = net(mbatch.src, mbatch.tgt, mbatch.src_mask, mbatch.tgt_mask)
             preds = preds.reshape(-1, preds.size(-1))
             labels = mbatch.tgt_y.reshape(-1)
             loss = loss_fn(preds, labels) / mbatch.ntokens
