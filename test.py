@@ -6,9 +6,10 @@ from transformer import Transformer
 
 def greedy_decode(net, src, src_mask, max_len, start_symbol):
     net.eval()
+    memory = net.encode(src, src_mask)
     ys = torch.full((len(src), max_len), start_symbol, dtype = src.dtype).to(src.device)
     for i in range(max_len-1):
-        out = net(src, ys, src_mask, tril_mask(ys))
+        out = net.generator(net.decode(memory, src_mask, ys, tril_mask(ys)))
         ys[:,i+1]=out.argmax(dim=-1)[:,i]
     return ys
 
