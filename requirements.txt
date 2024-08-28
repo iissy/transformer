@@ -1,5 +1,8 @@
-torch
-numpy
 pandas
-plotly
 torchkeras
+torchmetrics
+ipython
+tqdm
+requests
+accelerate
+ipywidgets
