@@ -8,6 +8,7 @@
 目前最新版本3.12，我这里选择3.11，向前选择一个版本
 ```
 conda create -n trans python==3.11
+conda activate trans
 ```
 
 ### 安装 torch
@@ -19,7 +20,7 @@ conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 pytorch-cuda=
 ### 安装包
 下面是我不断试错，总结出来需要安装的包
 ```
-pip install pandas torchkeras torchmetrics ipython tqdm requests accelerate ipywidgets matplotlib
+pip install -r requirements.txt
 ```
 
 ### 训练
