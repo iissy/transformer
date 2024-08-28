@@ -6,3 +6,4 @@ tqdm
 requests
 accelerate
 ipywidgets
+matplotlib

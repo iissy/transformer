@@ -19,5 +19,5 @@ conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 pytorch-cuda=
 ### 安装包
 下面是我不断试错，总结出来需要安装的包
 ```
-pip install pandas torchkeras torchmetrics ipython tqdm requests accelerate ipywidgets
+pip install pandas torchkeras torchmetrics ipython tqdm requests accelerate ipywidgets matplotlib
 ```
