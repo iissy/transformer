@@ -9,4 +9,6 @@ class WordEmbedding(nn.Module):
         self.d_model = d_model
 
     def forward(self, x):
-        return self.embedding(x) * math.sqrt(self.d_model) #note here, multiply sqrt(d_model)
+        # note here, multiply sqrt(d_model)
+        # 目的是加大输出的值，避免嵌入信息丢失
+        return self.embedding(x) * math.sqrt(self.d_model)
