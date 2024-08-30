@@ -2,7 +2,7 @@ from torch import nn
 from attention import clones,MultiHeadAttention
 from add import ResConnection
 from norm import LayerNorm
-from feedforward import PositionwiseFeedForward
+from feedforward import FeedForward
 
 class TransformerDecoderLayer(nn.Module):
     "TransformerDecoderLayer is made of self-attn, cross-attn, and feed forward (defined below)"
@@ -37,7 +37,7 @@ class TransformerDecoder(nn.Module):
     def from_config(cls ,N=6 ,d_model=512, d_ff=2048, h=8, dropout=0.1):
         self_attn = MultiHeadAttention(h, d_model)
         cross_attn = MultiHeadAttention(h, d_model)
-        ff = PositionwiseFeedForward(d_model, d_ff, dropout)
+        ff = FeedForward(d_model, d_ff, dropout)
         layer = TransformerDecoderLayer(d_model, self_attn, cross_attn, ff, dropout)
         return cls(layer ,N)
 
