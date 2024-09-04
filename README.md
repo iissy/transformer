@@ -1,8 +1,10 @@
 # transformer 源码实现
 
 ```
-注意：在3050，4080显卡上测试成功，不确定是否能在CPU上使用，因为用到了第三方训练包
+注意：在3050，4080显卡上测试成功，不确定是否能在CPU上使用，因为用到了第三方训练包。下图为训练精度变化情况，经过几轮训练，精度会迅速爬升。
 ```
+
+![精度](./images/history.png)
 
 ### 创建虚拟环境
 目前最新版本3.12，我这里选择3.11，向前选择一个版本
@@ -23,13 +25,8 @@ conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 pytorch-cuda=
 pip install -r requirements.txt
 ```
 
-### 训练
-训练完成，会在当前目录生成两个文件，checkpoint.pth，history.png，一个权重文件，一个训练进度图
-```
-python trainer.py
-```
-
 ### 测试
+安装完后，你可以直接用我已经训练好的权重测试
 ```
 (trans) I:\transformer>python test.py
 input:
@@ -40,6 +37,12 @@ ground truth:
 
 prediction:
 29233095751816778520
+```
+
+### 训练
+开始自己训练，会在当前目录生成两个文件，checkpoint.pth，history.png，一个权重文件，一个训练进度图
+```
+python trainer.py
 ```
 
 ## 参考
