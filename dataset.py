@@ -54,8 +54,8 @@ def get_data():
     token_y = [vocab_y[i] for i in y]
 
     # 转tensor
-    tensor_x = torch.LongTensor(token_x)
-    tensor_y = torch.LongTensor(token_y)
+    tensor_x = torch.LongTensor(token_x).to("cuda")
+    tensor_y = torch.LongTensor(token_y).to("cuda")
     return tensor_x, tensor_y
 
 
@@ -78,16 +78,16 @@ class TwoSumDataset(torch.utils.data.Dataset):
 
 
 ds_train = TwoSumDataset(size=100000)
-ds_val = TwoSumDataset(size=10000)
+ds_val = TwoSumDataset(size=100000)
 
 # 数据加载器
 dl_train = DataLoader(dataset=ds_train,
-                      batch_size=200,
+                      batch_size=100,
                       drop_last=True,
                       shuffle=True)
 
 dl_val = DataLoader(dataset=ds_val,
-                    batch_size=200,
+                    batch_size=100,
                     drop_last=True,
                     shuffle=False)
 
