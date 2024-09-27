@@ -20,7 +20,8 @@ def train():
     for epoch in range(10):
         model.train()
         for step, data in enumerate(dl_train):
-            batch = MaskedBatch(src=data[0], tgt=data[1], pad=0)
+            src, tgt = data
+            batch = MaskedBatch(src=src, tgt=tgt, pad=0)
             out = model(batch.src, batch.tgt, batch.src_mask, batch.tgt_mask)
             targets = out.reshape(-1, out.size(-1))
             labels = batch.tgt_y.reshape(-1)

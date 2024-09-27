@@ -78,11 +78,11 @@ class TwoSumDataset(torch.utils.data.Dataset):
 
 
 ds_train = TwoSumDataset(size=100000)
-ds_val = TwoSumDataset(size=100000)
+ds_val = TwoSumDataset(size=10000)
 
 # 数据加载器
 dl_train = DataLoader(dataset=ds_train,
-                      batch_size=1000,
+                      batch_size=100,
                       drop_last=True,
                       shuffle=True)
 
