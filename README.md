@@ -26,7 +26,7 @@ pip install -r requirements.txt
 ### 测试
 安装完后，你可以直接用我已经训练好的权重测试
 ```
-(trans) I:\transformer>python test.py
+(trans) I:\transformer>python inter.py
 input:
 646487066023+29233095105329712497
 

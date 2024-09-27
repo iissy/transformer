@@ -82,12 +82,12 @@ ds_val = TwoSumDataset(size=100000)
 
 # 数据加载器
 dl_train = DataLoader(dataset=ds_train,
-                      batch_size=100,
+                      batch_size=1000,
                       drop_last=True,
                       shuffle=True)
 
 dl_val = DataLoader(dataset=ds_val,
-                    batch_size=100,
+                    batch_size=1000,
                     drop_last=True,
                     shuffle=False)
 
