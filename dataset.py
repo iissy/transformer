@@ -13,7 +13,7 @@ words_y = '<PAD>,1,2,3,4,5,6,7,8,9,0,<SOS>,<EOS>'
 vocab_y = {word: i for i, word in enumerate(words_y.split(','))}
 vocab_yr = [k for k in vocab_y.keys()]
 
-device = "cpu"
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 # 两数相加数据集
 def get_data():
