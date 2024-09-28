@@ -13,6 +13,8 @@ words_y = '<PAD>,1,2,3,4,5,6,7,8,9,0,<SOS>,<EOS>'
 vocab_y = {word: i for i, word in enumerate(words_y.split(','))}
 vocab_yr = [k for k in vocab_y.keys()]
 
+device = "cpu"
+
 # 两数相加数据集
 def get_data():
     # 定义词集合
@@ -54,8 +56,8 @@ def get_data():
     token_y = [vocab_y[i] for i in y]
 
     # 转tensor
-    tensor_x = torch.LongTensor(token_x).to("cuda")
-    tensor_y = torch.LongTensor(token_y).to("cuda")
+    tensor_x = torch.LongTensor(token_x).to(device)
+    tensor_y = torch.LongTensor(token_y).to(device)
     return tensor_x, tensor_y
 
 

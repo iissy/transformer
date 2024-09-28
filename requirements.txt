@@ -1,9 +1,4 @@
+torch
 pandas
-torchkeras
-torchmetrics
-ipython
-tqdm
-requests
 accelerate
-ipywidgets
 matplotlib

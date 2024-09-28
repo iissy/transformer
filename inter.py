@@ -1,6 +1,6 @@
 import torch
 from attention import tril_mask
-from dataset import get_data,vocab_x,vocab_y,vocab_xr,vocab_yr
+from dataset import device,get_data,vocab_x,vocab_y,vocab_xr,vocab_yr
 from attention import MaskedBatch
 from transformer import Transformer
 
@@ -22,16 +22,13 @@ def get_words(tensor, vocab_r) ->"str":
     words = s[:s.find('<EOS>')].replace('<SOS>','')
     return words
 
-def prepare(x):
-    return x.to("cuda")
-
 
 ##解码翻译结果
 net = Transformer.from_config(src_vocab=len(vocab_x), tgt_vocab=len(vocab_y), N=5, d_model=64, d_ff=128, h=8, dropout=0.1)
-net.load_state_dict(torch.load("checkpoint.pth", map_location='cuda'))
-net = prepare(net)
+net.load_state_dict(torch.load("checkpoint.pth", map_location=device))
+net = net.to(device)
 src, tgt = get_data()
-src, tgt = prepare(src), prepare(tgt)
+src, tgt = src, tgt
 masked = MaskedBatch(src=src.unsqueeze(dim=0), tgt=tgt.unsqueeze(dim=0))
 y_pred = greedy_decode(net, masked.src, masked.src_mask, 50, vocab_y["<SOS>"])
 print("input:")

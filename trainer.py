@@ -4,13 +4,13 @@ from attention import MaskedBatch,tril_mask
 from transformer import Transformer
 from labelsmoothing import LabelSmoothingLoss
 from optim import NoamOpt
-from dataset import vocab_x,vocab_y
+from dataset import device,vocab_x,vocab_y
 from dataset import dl_train
 
 model = Transformer.from_config(src_vocab=len(vocab_x), tgt_vocab=len(vocab_y), N=5, d_model=64, d_ff=128, h=8, dropout=0.1)
 loss_fn = LabelSmoothingLoss(size=len(vocab_y), padding_idx=0, smoothing=0.1)
 optimizer = NoamOpt(model.parameters(), model_size=64)
-model.to("cuda")
+model.to(device)
 
 def train():
     start = time.time()
