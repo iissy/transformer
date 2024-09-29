@@ -42,7 +42,11 @@ def train():
                 start = time.time()
                 tokens = 0
 
-    torch.save(model.state_dict(), "checkpoint.pth")
+    accelerator.wait_for_everyone()
+    unwrapped_model = accelerator.unwrap_model(model)
+    model_dict = accelerator.get_state_dict(unwrapped_model)
+    torch.save(model_dict, "checkpoint.pth")
+
     spend = time.time() - global_start
     print("total time: %d" % spend)
 
