@@ -1,8 +1,10 @@
 import torch
 from attention import tril_mask
-from dataset import device,get_data,vocab_x,vocab_y,vocab_xr,vocab_yr
+from dataset import get_data,vocab_x,vocab_y,vocab_xr,vocab_yr
 from attention import MaskedBatch
 from transformer import Transformer
+
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 def greedy_decode(net, src, src_mask, max_len, start_symbol):
     net.eval()
@@ -28,7 +30,7 @@ net = Transformer.from_config(src_vocab=len(vocab_x), tgt_vocab=len(vocab_y), N=
 net.load_state_dict(torch.load("checkpoint.pth", map_location=device))
 net = net.to(device)
 src, tgt = get_data()
-src, tgt = src, tgt
+src, tgt = src.to(device), tgt.to(device)
 masked = MaskedBatch(src=src.unsqueeze(dim=0), tgt=tgt.unsqueeze(dim=0))
 y_pred = greedy_decode(net, masked.src, masked.src_mask, 50, vocab_y["<SOS>"])
 print("input:")

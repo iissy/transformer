@@ -1,16 +1,18 @@
 import torch
 import time
-from attention import MaskedBatch,tril_mask
+from accelerate import Accelerator
+from attention import MaskedBatch
 from transformer import Transformer
 from labelsmoothing import LabelSmoothingLoss
 from optim import NoamOpt
-from dataset import device,vocab_x,vocab_y
+from dataset import vocab_x,vocab_y
 from dataset import dl_train
 
 model = Transformer.from_config(src_vocab=len(vocab_x), tgt_vocab=len(vocab_y), N=5, d_model=64, d_ff=128, h=8, dropout=0.1)
 loss_fn = LabelSmoothingLoss(size=len(vocab_y), padding_idx=0, smoothing=0.1)
 optimizer = NoamOpt(model.parameters(), model_size=64)
-model.to(device)
+accelerator = Accelerator()
+model, optimizer, opt_data = accelerator.prepare(model, optimizer, dl_train)
 
 def train():
     start = time.time()
@@ -18,16 +20,16 @@ def train():
     total_tokens = 0
     total_loss = 0
     tokens = 0
-    for epoch in range(5):
+    for epoch in range(10):
         model.train()
-        for step, data in enumerate(dl_train):
+        for step, data in enumerate(opt_data):
             src, tgt = data
             batch = MaskedBatch(src=src, tgt=tgt, pad=0)
             out = model(batch.src, batch.tgt, batch.src_mask, batch.tgt_mask)
             targets = out.reshape(-1, out.size(-1))
             labels = batch.tgt_y.reshape(-1)
             loss = loss_fn(targets, labels) / batch.ntokens
-            loss.backward()
+            accelerator.backward(loss)
             optimizer.step()
             optimizer.zero_grad()
 
