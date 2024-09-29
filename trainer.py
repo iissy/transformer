@@ -14,10 +14,11 @@ model.to(device)
 
 def train():
     start = time.time()
+    global_start = time.time()
     total_tokens = 0
     total_loss = 0
     tokens = 0
-    for epoch in range(30):
+    for epoch in range(5):
         model.train()
         for step, data in enumerate(dl_train):
             src, tgt = data
@@ -40,6 +41,8 @@ def train():
                 tokens = 0
 
     torch.save(model.state_dict(), "checkpoint.pth")
+    spend = time.time() - global_start
+    print("total time: %d" % spend)
 
 if __name__ == '__main__':
     train()
