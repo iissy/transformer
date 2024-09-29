@@ -17,7 +17,7 @@ def train():
     total_tokens = 0
     total_loss = 0
     tokens = 0
-    for epoch in range(10):
+    for epoch in range(30):
         model.train()
         for step, data in enumerate(dl_train):
             src, tgt = data
