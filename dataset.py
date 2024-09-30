@@ -1,8 +1,9 @@
 import random
-
 import numpy as np
 import torch
 from torch.utils.data import Dataset,DataLoader
+
+import config
 
 # 定义字典
 words_x = '<PAD>,1,2,3,4,5,6,7,8,9,0,<SOS>,<EOS>,+'
@@ -77,18 +78,18 @@ class TwoSumDataset(torch.utils.data.Dataset):
         return get_data()
 
 
-ds_train = TwoSumDataset(size=100000)
-ds_val = TwoSumDataset(size=10000)
+ds_train = TwoSumDataset(size=config.train_data_size)
+ds_val = TwoSumDataset(size=config.val_data_size)
 
 # 数据加载器
 dl_train = DataLoader(dataset=ds_train,
-                      batch_size=100,
-                      drop_last=True,
+                      batch_size=config.train_batch_size,
+                      drop_last=config.drop_last,
                       shuffle=True)
 
 dl_val = DataLoader(dataset=ds_val,
-                    batch_size=1000,
-                    drop_last=True,
+                    batch_size=config.val_batch_size,
+                    drop_last=config.drop_last,
                     shuffle=False)
 
 # x, y = get_data()
