@@ -42,6 +42,10 @@ prediction:
 ```
 python trainer.py
 ```
+你也可以使用集成了第三方包的训练，效果是一样的，额外会生成一个损失，精度图
+```
+python keras_trainer.py
+```
 
 ## 参考
 https://github.com/lyhue1991/torchkeras
