@@ -23,7 +23,7 @@ https://huggingface.co/Helsinki-NLP/opus-mt-zh-en
 
 文生图大模型
 ```
-https://huggingface.co/spaces/black-forest-labs/FLUX.1-schnell
+https://huggingface.co/black-forest-labs/FLUX.1-schnell
 ```
 
 ### 测试
